@@ -1,0 +1,15 @@
+{
+  "name": "render",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "author": "Joel Shepherd <joel-npm@swivid.ink>",
+  "repository": "github:joelshepherd/render",
+  "module": "dist/mod.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.5"
+  }
+}
