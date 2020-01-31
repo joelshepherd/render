@@ -43,10 +43,10 @@ export const React = { createElement };
 
 declare global {
   namespace JSX {
-    type IntrinsicElements = Subpartial<HTMLElementTagNameMap>;
+    // Waiting for https://github.com/microsoft/TypeScript/issues/14729 for better Element type
+    type Element = HTMLElement;
+    type IntrinsicElements = {
+      [K in keyof HTMLElementTagNameMap]: Partial<HTMLElementTagNameMap[K]>;
+    };
   }
 }
-
-type Subpartial<T> = {
-  [K in keyof T]: Partial<T[K]>;
-};

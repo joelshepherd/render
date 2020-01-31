@@ -5,8 +5,7 @@ function List(render: RenderFn) {
   const element = render(<ul />);
 
   const addItem = (text: string) => {
-    const item = Item(appendTo(element));
-    item({ text });
+    Item(appendTo(element), { text });
   };
 
   return { addItem };
@@ -17,15 +16,15 @@ type ItemProps = {
   text: string;
 };
 
-function Item(render: RenderFn) {
-  const element = render(<li className="some-class" />);
+function Item(render: RenderFn, props: ItemProps) {
+  const element = render(<li>{props.text}</li>);
 
-  return (props: ItemProps) => (element.innerText = props.text);
+  return (props: ItemProps) => (element.textContent = props.text);
 }
 
 // input.ts
 function Input(render: RenderFn, addItem: (text: string) => void) {
-  const input = <input type="string" name="text" />;
+  const input = (<input type="string" name="text" />) as HTMLInputElement;
   const element = render(
     <form>
       {input}
@@ -33,7 +32,7 @@ function Input(render: RenderFn, addItem: (text: string) => void) {
     </form>
   );
 
-  element.addEventListener("submit", (e: Event) => {
+  element.addEventListener("submit", e => {
     e.preventDefault();
     addItem(input.value);
     input.value = "";
